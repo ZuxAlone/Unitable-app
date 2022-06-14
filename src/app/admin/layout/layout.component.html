@@ -1,0 +1,23 @@
+<mat-toolbar class="bg-primary text-light">
+    <span>Unitable</span>
+    <button mat-button routerLink="/admin" class="ms-3">Actividades</button>
+    <button mat-button routerLink="/admin" class="ms-3">Grupos</button>
+
+    <span class="spacer"></span>
+
+    <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon> Usuario
+    </button>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="verPerfil()">
+            <mat-icon>account_circle</mat-icon> Ver perfil
+        </button>
+        <button mat-menu-item (click)="signout()">
+            <mat-icon>logout</mat-icon> Cerrar sesión
+        </button>
+    </mat-menu>
+
+</mat-toolbar>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,72 @@
+<div class="w-50 container-sm mt-5 bg-light border border-dark border-4 rounded">
+    <div class="my-5">
+        <h1 class="fw-bold row justify-content-center">Registro</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <form autocomplete="off" (ngSubmit)="onSubmit()" #signupForm="ngForm">
+                    <mat-form-field appearance="outline" class="d-block">
+                        <mat-label>Nombres</mat-label>
+                        <input matInput type="text" placeholder="Nombres" name="nombre" [(ngModel)]="signup.nombres"
+                            #nombre="ngModel" required />
+                        <mat-error *ngIf="nombre.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="d-block">
+                        <mat-label>Apellidos</mat-label>
+                        <input matInput type="text" placeholder="Apellidos" name="apellido"
+                            [(ngModel)]="signup.apellidos" #apellido="ngModel" required />
+                        <mat-error *ngIf="apellido.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="d-block">
+                        <mat-label>Correo</mat-label>
+                        <input matInput type="text" placeholder="Correo" name="correo" [(ngModel)]="signup.correo"
+                            #correo="ngModel" required />
+                        <mat-error *ngIf="correo.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="d-block">
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput type="password" placeholder="Contraseña" name="password"
+                            [(ngModel)]="signup.password" #password="ngModel" required />
+                        <mat-error *ngIf="password.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="d-block">
+                        <mat-label>Carrera</mat-label>
+                        <input matInput type="text" placeholder="Carrera" name="carrera" [(ngModel)]="signup.carrera" #carrera="ngModel"
+                            required />
+                        <mat-error *ngIf="carrera.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="d-block">
+                        <mat-label>Tipo de Usuario</mat-label>
+                        <mat-select (selectionChange)="show()" name="tipo" [(ngModel)]="signup.tipo" #tipo="ngModel" required>
+                            <mat-option [value]=0>Estudiante</mat-option>
+                            <mat-option [value]=1>Coach</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="tipo.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <button mat-raised-button class="bg-dark text-light mt-5 w-100" [disabled]="signupForm.invalid">
+                        Registrar
+                    </button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
