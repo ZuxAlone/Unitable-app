@@ -11,6 +11,8 @@ import { EditActividadComponent } from './actividades/edit-actividad/edit-activi
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListViewComponent } from './actividades/shared/list-view/list-view.component';
+import { UsuarioEditComponent } from './usuarios/usuario-edit/usuario-edit.component';
+import { UsuarioListComponent } from './usuarios/usuario-list/usuario-list.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { ListViewComponent } from './actividades/shared/list-view/list-view.comp
     EditActividadComponent,
 
     ListViewComponent,
+      UsuarioEditComponent,
+      UsuarioListComponent,
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,7 @@ import { ListActividadComponent } from './actividades/list-actividad/list-activi
 import { NewActividadComponent } from './actividades/new-actividad/new-actividad.component';
 import { LayoutComponent } from './layout/layout.component';
 import { UsuarioInfoComponent } from './usuarios/usuario-info/usuario-info.component';
+import { UsuarioListComponent } from './usuarios/usuario-list/usuario-list.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: "usuario-info",
         component: UsuarioInfoComponent
+      },
+      {
+        path: "usuarios",
+        component: UsuarioListComponent
       },
       {
         path: "actividades",

@@ -1,1 +1,25 @@
-<p>usuario-info works!</p>
+<mat-card *ngIf="usuario" class="container mt-5 w-75 bg-light">
+    <mat-card-title class="my-3">{{usuario.nombres}} {{usuario.apellidos}}</mat-card-title>
+    <mat-action-row>
+        <button *ngIf="!usuario.isPremium; else notPremium" mat-raised-button color="get" (click)="get_cancel_premium()">Get
+            Premium</button>
+        <ng-template #notPremium>
+            <button mat-raised-button color="cancel" (click)="get_cancel_premium()">Cancel Premium</button>
+        </ng-template>
+    </mat-action-row>
+    <mat-card-content>
+        <p id="mon">Monedas: {{usuario.numMonedas}}</p>
+        <p>Correo: {{usuario.correo}}</p>
+        <p>Carrera: {{usuario.carrera}}</p>
+        <p>Actividades completadas: {{usuario.numActCompletas}}</p>
+        <p>Test aprobados: {{usuario.numTestAprobados}}</p>
+        <p *ngIf="!usuario.tipo; else coach">Tipo de Usuario: Estudiante</p>
+        <ng-template #coach>
+            <p>Tipo de Usuario: Coach</p>
+        </ng-template>
+    </mat-card-content>
+    <mat-action-row>
+        <button mat-raised-button class="bg-primary text-light" (click)="updateUsuario()">EDITAR PERFIL</button>
+        <button mat-raised-button color="warn" (click)="deleteUsuario()">ELIMINAR</button>
+    </mat-action-row>
+</mat-card>

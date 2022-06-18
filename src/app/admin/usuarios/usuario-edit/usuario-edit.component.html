@@ -1,0 +1,63 @@
+<div class="container mt-5" style="min-width: 500px;">
+    <h1 class="fw-bold row justify-content-center">
+        Editar Información de Usuario
+    </h1>
+
+    <div class="row justify-content-center">
+        <div>
+            <form (ngSubmit)="updateUsuario()" #loginForm="ngForm">
+                <div>
+                    <mat-form-field appearance="outline" class="d-block">
+                        <mat-label>Nombres</mat-label>
+                        <input matInput type="text" placeholder="Nombres" [(ngModel)]="usuarioEdit.nombres" name="nombres"
+                            #nombres="ngModel" required>
+                        <mat-error *ngIf="nombres.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="d-block">
+                        <mat-label>Apellidos</mat-label>
+                        <input matInput type="text" placeholder="Apellidos" [(ngModel)]="usuarioEdit.apellidos"
+                            name="apellidos" #apellidos="ngModel" required>
+                        <mat-error *ngIf="apellidos.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="d-block">
+                        <mat-label>Carrera</mat-label>
+                        <input matInput type="text" placeholder="Carrera" [(ngModel)]="usuarioEdit.carrera" name="carrera"
+                            #carrera="ngModel" required>
+                        <mat-error *ngIf="carrera.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="d-block">
+                        <mat-label>Tipo de Usuario</mat-label>
+                        <mat-select name="tipo" [(ngModel)]="usuarioEdit.tipo" #tipou="ngModel" required>
+                            <mat-option [value]=0>Estudiante</mat-option>
+                            <mat-option [value]=1>Coach</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="tipou.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+
+                    <div class="d-flex justify-content-around">
+                        <button mat-raised-button type="button" color="primary" class="mt-5" style="width: 35%;"
+                            mat-dialog-close>
+                            Cancelar
+                        </button>
+                        <button mat-raised-button type="submit" color="primary" class="mt-5" style="width: 35%;"
+                            mat-dialog-close [disabled]="loginForm.invalid">
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+    </div>
