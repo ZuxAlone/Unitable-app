@@ -1,0 +1,45 @@
+<div>
+    <div class="d-flex justify-content-between">
+        <label class="text-left bold">
+            Lista de Actividades
+        </label>
+        <button class="margin" mat-raised-button color="primary" mat-button routerLink='/admin/actividades/nuevo'>
+            Nueva Actividad
+        </button>
+    </div>
+
+    <div *ngFor="let actividad of actividades">
+        <mat-expansion-panel style="background-color: rgb(247, 243, 211);">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="text-end" style="font-size: 20px;">
+                {{actividad.nombre}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>Detalles: {{actividad.detalle}}</p>
+            <p>Fecha de inicio: {{actividad.horaIni}}</p>
+            <p>Fecha de fin: {{actividad.horaFin}}</p>
+            <p>Tema: {{actividad.tema}}</p>
+            <p>Activa: {{actividad.activa}}</p>
+            <mat-action-row>
+                <div class="d-flex justify-content-between" style="width: 100%;">
+                    <div>
+                        <button mat-raised-button color="accent" (click)="terminarActividad(actividad.id, actividad)" [disabled]="!actividad.activa">TERMINAR</button>
+                    </div>
+                    <div>
+                        <button mat-raised-button color="warn" (click)="deleteActividad(actividad.id, actividad.nombre)">ELIMINAR</button>
+                        <button mat-raised-button color="primary" mat-button [routerLink]="[actividad.id, 'editar']" [disabled]="!actividad.activa">EDITAR</button>
+                    </div>
+                </div>
+            </mat-action-row>
+            
+        </mat-expansion-panel>
+    </div>
+
+    <div *ngIf = "(actividades | json) == '[]'">
+        <label class="text-left" style="margin: 20px;">
+            No tienes actividades, agrega alguna actividad.
+        </label>
+    </div>
+
+</div>    
+

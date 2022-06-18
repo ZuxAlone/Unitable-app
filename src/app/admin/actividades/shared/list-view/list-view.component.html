@@ -1,0 +1,19 @@
+<div class="d-flex justify-content-center">
+	<table *ngIf="actividades" class="ancho">
+		<tr *ngFor="let actividad of actividades">
+			<div class="d-flex justify-content-center">
+				<mat-card class="espaciado">
+					<p>
+						{{actividad.nombre}}
+					</p>
+					<p>
+						{{actividad.horaIni}}
+					</p>
+					<p>
+						{{actividad.horaFin}}
+					</p>
+				</mat-card>
+			</div>
+		</tr>
+	</table>	
+</div>

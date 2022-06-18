@@ -12,7 +12,7 @@ import { UnauthorizedInterceptor } from './interceptors/unauthorized.interceptor
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

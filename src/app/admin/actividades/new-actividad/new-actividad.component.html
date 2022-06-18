@@ -1,0 +1,159 @@
+<div class="d-flex flex-row" style="margin: 20px;">
+    <button mat-raised-button color="primary" type="button" routerLink = "/admin/actividades">
+        <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+</div>
+
+<div class="row">
+
+    <div class="col">
+        <h1 class="fw-bold d-flex justify-content-center"> 
+            Actividades Creadas
+        </h1>
+        <div class="row">
+            <app-list-view></app-list-view>
+        </div>
+    </div>
+
+    <div class="col">
+        <h1 class="fw-bold d-flex justify-content-center"> 
+            Nueva Actividad
+        </h1>
+        <div class="d-flex justify-content-center">
+            <form #Createform="ngForm">
+                <div class="row">
+                    <div class="d-flex justify-content-center">
+                        <mat-form-field appearance="outline" class="inputCuadro">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput
+                                type="text"
+                                placeholder="Nombre"
+                                [(ngModel)]="actividad.nombre"
+                                name = "nombre"
+                                #nombre="ngModel"
+                                required
+                            >
+                            <mat-error *ngIf="nombre.hasError('required')">
+                                Este campo es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    
+                    <div class="d-flex justify-content-center">
+                        <mat-form-field appearance="outline" class="inputCuadro">
+                            <mat-label>Detalles</mat-label>
+                            <input matInput
+                                type="text"
+                                placeholder="Detalles"
+                                [(ngModel)]="actividad.detalles"
+                                name = "detalles"
+                                #detalles="ngModel"
+                                required
+                            >
+                            <mat-error *ngIf="detalles.hasError('required')">
+                                Este campo es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <mat-form-field class="inputFechas" appearance="outline">
+                            <mat-label>Fecha de Inicio</mat-label>
+                            <input matInput
+                                type="date"
+                                placeholder="Fecha de Inicio"
+                                [(ngModel)]="actividad.fecha_ini_date"
+                                name = "fecha_ini"
+                                #fecha_ini="ngModel"
+                                required
+                            >
+                            <mat-error *ngIf="fecha_ini.hasError('required')">
+                                Este campo es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+
+                        <div class="area_botones">
+
+                        </div>
+
+                        <mat-form-field class="inputFechas" appearance="outline">
+                            <mat-label>Hora de Inicio</mat-label>
+                            <input matInput
+                                type="time"
+                                placeholder="Fecha de Inicio"
+                                [(ngModel)]="actividad.fecha_ini_time"
+                                name = "fecha_ini"
+                                #fecha_ini="ngModel"
+                                required
+                            >
+                            <mat-error *ngIf="fecha_ini.hasError('required')">
+                                Este campo es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <mat-form-field class="inputFechas" appearance="outline">
+                            <mat-label>Fecha de Fin</mat-label>
+                            <input matInput
+                                type="date"
+                                placeholder="Fecha de Fin"
+                                [(ngModel)]="actividad.fecha_fin_date"
+                                name = "fecha_fin"
+                                #fecha_fin="ngModel"
+                                required
+                            >
+                            <mat-error *ngIf="fecha_fin.hasError('required')">
+                                Este campo es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+
+                        <div class="area_botones">
+
+                        </div>
+
+                        <mat-form-field class="inputFechas" appearance="outline">
+                            <mat-label>Fecha de Fin</mat-label>
+                            <input matInput
+                                type="time"
+                                placeholder="Hora de Fin"
+                                [(ngModel)]="actividad.fecha_fin_time"
+                                name = "fecha_fin"
+                                #fecha_fin="ngModel"
+                                required
+                            >
+                            <mat-error *ngIf="fecha_fin.hasError('required')">
+                                Este campo es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <mat-form-field class="inputCuadro" appearance="outline">
+                          <mat-label>Tema</mat-label>
+                          <mat-select name="Tema" [(ngModel)]="actividad.tema_id" #Tema="ngModel" required>
+                            <div *ngFor="let tema of temas">
+                              <mat-option [value]="tema.id">{{tema.nombre}}</mat-option>
+                            </div>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button mat-raised-button type="button" color="primary" class="mt-5 inputFechas" routerLink = "/admin/actividades">
+                            Cancelar
+                        </button>
+
+                        <div class="area_botones">
+
+                        </div>
+
+                        <button mat-raised-button type="button" (click)="create()" color="primary" class="mt-5 inputFechas" [disabled]="Createform.invalid" routerLink = "/admin/actividades">
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

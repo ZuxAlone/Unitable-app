@@ -1,0 +1,125 @@
+<div class="d-flex flex-row" style="margin: 20px;">
+    <button mat-raised-button color="primary" type="button" routerLink = "/admin/actividades">
+		<mat-icon>keyboard_backspace</mat-icon>
+	</button>
+</div>
+
+<div>
+    <div class="new-actividad-form container mt-5" style="max-width: 1000px;">
+        <h1 class="fw-bold row justify-content-center"> 
+            Editar Actividad
+        </h1>
+
+        <div class="row justify-content-center">
+            <div>
+                <form #loginForm="ngForm">
+                    <div>
+                        <mat-form-field appearance="outline" class="d-block">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput
+                                type="text"
+                                placeholder="Nombre"
+                                [(ngModel)]="actividad.nombre"
+                                name = "nombre"
+                                #nombre="ngModel"
+                                required
+                            >
+                            <mat-error *ngIf="nombre.hasError('required')">
+                                Este campo es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+                
+                        <mat-form-field appearance="outline" class="d-block">
+                            <mat-label>Detalles</mat-label>
+                            <input matInput
+                                type="text"
+                                placeholder="Detalles"
+                                [(ngModel)]="actividad.detalles"
+                                name = "detalles"
+                                #detalles="ngModel"
+                                required
+                            >
+                            <mat-error *ngIf="detalles.hasError('required')">
+                                Este campo es obligatorio
+                            </mat-error>
+                        </mat-form-field>
+
+
+                        <div class="date-box d-block">
+                            <mat-form-field class="date-box-date" appearance="outline">
+                                <mat-label>Fecha de Inicio</mat-label>
+                                <input matInput
+                                    type="date"
+                                    placeholder="Fecha de Inicio"
+                                    [(ngModel)]="actividad.fecha_ini_date"
+                                    name = "fecha_ini"
+                                    #fecha_ini="ngModel"
+                                    required
+                                >
+                                <mat-error *ngIf="fecha_ini.hasError('required')">
+                                    Este campo es obligatorio
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="date-box-time" appearance="outline">
+                                <mat-label>Hora de Inicio</mat-label>
+                                <input matInput
+                                    type="time"
+                                    placeholder="Fecha de Inicio"
+                                    [(ngModel)]="actividad.fecha_ini_time"
+                                    name = "fecha_ini"
+                                    #fecha_ini="ngModel"
+                                    required
+                                >
+                                <mat-error *ngIf="fecha_ini.hasError('required')">
+                                    Este campo es obligatorio
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+        
+                        <div class="date-box d-block">
+                            <mat-form-field class="date-box-date" appearance="outline">
+                                <mat-label>Fecha de Fin</mat-label>
+                                <input matInput
+                                    type="date"
+                                    placeholder="Fecha de Fin"
+                                    [(ngModel)]="actividad.fecha_fin_date"
+                                    name = "fecha_fin"
+                                    #fecha_fin="ngModel"
+                                    required
+                                >
+                                <mat-error *ngIf="fecha_fin.hasError('required')">
+                                    Este campo es obligatorio
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="date-box-time" appearance="outline">
+                                <mat-label>Fecha de Fin</mat-label>
+                                <input matInput
+                                    type="time"
+                                    placeholder="Hora de Fin"
+                                    [(ngModel)]="actividad.fecha_fin_time"
+                                    name = "fecha_fin"
+                                    #fecha_fin="ngModel"
+                                    required
+                                >
+                                <mat-error *ngIf="fecha_fin.hasError('required')">
+                                    Este campo es obligatorio
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                
+                        <div class="d-flex justify-content-around">
+                            <button mat-raised-button type="button" color="primary" class="mt-5" style="width: 35%;" routerLink = "/admin/actividades">
+                                Cancelar
+                            </button>
+                            <button mat-raised-button type="submit" color="primary" class="mt-5" style="width: 35%;" (click)="editActividad()" routerLink = "/admin/actividades" [disabled]="loginForm.invalid">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+    <app-list-view class="new-actividad-view"></app-list-view>
+</div>

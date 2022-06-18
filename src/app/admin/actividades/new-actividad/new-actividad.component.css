@@ -1,0 +1,43 @@
+.bold{
+    font-weight: bold;
+    font-size: 30px;
+    margin: 20px;
+}
+
+.inputCuadro{
+    width: 70%;
+}
+
+.inputFechas{
+    width: 30%;
+}
+
+.area_botones{
+    width: 10% !important;
+}
+
+.mat-form-field-wrapper{
+    width: 500px !important;
+}
+
+.date-box-date{
+    width: 50%;
+}
+
+.date-box-time{
+    width: 50%;
+}
+
+.new-actividad-form{
+    float: right;
+    width: 60%;
+    display: block;
+    padding-right: 15%;
+}
+
+.new-actividad-view{
+    float: left;
+    width: 40%;
+    display: block;
+    padding: 20px;
+}
