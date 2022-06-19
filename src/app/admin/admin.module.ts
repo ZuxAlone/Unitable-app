@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListViewComponent } from './actividades/shared/list-view/list-view.component';
 import { UsuarioEditComponent } from './usuarios/usuario-edit/usuario-edit.component';
 import { UsuarioListComponent } from './usuarios/usuario-list/usuario-list.component';
+import { TestActividadComponent } from './actividades/test-actividad/test-actividad.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { UsuarioListComponent } from './usuarios/usuario-list/usuario-list.compo
     ListViewComponent,
       UsuarioEditComponent,
       UsuarioListComponent,
+      TestActividadComponent,
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Actividad, ActividadReq, Tema } from './actividad.model';
+import { Actividad, ActividadReq, Curso, Tema, Test } from './actividad.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,12 @@ export class ActividadService {
     return this.http.get<Actividad[]>(`${this.apiBase}/Actividad/actividades`)
   }
 
-  getAllTemas(){
-    return this.http.get<Tema[]>(`${this.apiBase}/Tema`)
+  getTemasByCurso(id: number){
+    return this.http.get<Tema[]>(`${this.apiBase}/Tema/temas/${id}`)
+  }
+
+  getAllCursos(){
+    return this.http.get<Curso[]>(`${this.apiBase}/Curso`)
   }
 
   createActividad(actividadReq:ActividadReq){
@@ -33,5 +37,9 @@ export class ActividadService {
 
   terminarActividad(id:number, actividadReq:ActividadReq){
     return this.http.put(`${this.apiBase}/Actividad/finish/${id}`, actividadReq)
+  }
+
+  getTest(id: number){
+    return this.http.get<Test>(`${this.apiBase}/Test/test/${id}`)
   }
 }

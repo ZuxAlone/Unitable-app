@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +8,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ServerErrorsInterceptor } from './interceptors/server-errors.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { UnauthorizedInterceptor } from './interceptors/unauthorized.interceptor';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [

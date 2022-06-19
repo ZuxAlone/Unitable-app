@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Tema } from '../shared/actividad.model';
+import { Curso, Tema } from '../shared/actividad.model';
 import { ActividadService } from '../shared/actividad.service';
 
 @Component({
@@ -13,6 +13,14 @@ export class NewActividadComponent implements OnInit {
   public invalid: boolean = true;
 
   temas: Tema[] = [];
+
+  cursos: Curso[] = [];
+  cursito: Curso = {
+    id: 1,
+    nombre: "",
+    descripcion: "",
+    status: true,
+  }
 
   actividad={
     nombre:"",
@@ -27,7 +35,7 @@ export class NewActividadComponent implements OnInit {
   constructor(private actividadService:ActividadService, private router:Router) { }
 
   ngOnInit(): void {
-    this.getAllTemas();
+    this.getAllCursos();
   }
 
   create(){
@@ -63,10 +71,17 @@ export class NewActividadComponent implements OnInit {
       });
   }
 
-  getAllTemas():void{
-    this.actividadService.getAllTemas()
+  getTemasByCurso():void{
+    this.actividadService.getTemasByCurso(this.cursito.id)
     .subscribe((data:any)=>{
       this.temas = data;
+    })
+  }
+
+  getAllCursos():void{
+    this.actividadService.getAllCursos()
+    .subscribe((data:any)=>{
+      this.cursos = data;
     })
   }
 

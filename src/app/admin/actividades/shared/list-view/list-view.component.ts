@@ -10,7 +10,6 @@ import { ActividadService } from '../actividad.service';
 export class ListViewComponent implements OnInit {
 
   actividades: Actividad[] = [];
-  actividadDisplay: any[] = [];
 
   constructor(private actividadService:ActividadService) { }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Actividad } from '../shared/actividad.model';
 import { ActividadService } from '../shared/actividad.service';
 
 @Component({
@@ -25,6 +26,7 @@ export class EditActividadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAll();
   }
 
   editActividad(){
@@ -57,6 +59,24 @@ export class EditActividadComponent implements OnInit {
       }, (error)=>{
       this.invalid = true;
       });
+  }
+
+  getAll():void{
+    this.actividadService.getAll()
+    .subscribe((data:Actividad[])=>{
+      for(let i=0;i<data.length;i++){
+        if(data[i].id == this.editid){
+          this.actividad.nombre = data[i].nombre;
+          this.actividad.detalles = data[i].detalle;
+          //this.actividad.fecha_ini_date = data[i].horaIni.getFullYear();
+          //this.actividad.fecha_ini_time.setUTCHours(data[i].horaIni.getUTCHours());
+          //this.actividad.fecha_fin_date = data[i].horaFin.getFullYear();
+          //this.actividad.fecha_fin_time.setUTCHours(data[i].horaFin.getUTCHours());
+        }
+      }
+    })
+
+
   }
 
 

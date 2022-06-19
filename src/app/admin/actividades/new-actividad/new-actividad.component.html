@@ -130,6 +130,17 @@
 
                     <div class="d-flex justify-content-center">
                         <mat-form-field class="inputCuadro" appearance="outline">
+                          <mat-label>Curso</mat-label>
+                          <mat-select name="Curso" [(ngModel)]="cursito" #Curso="ngModel" (selectionChange)="getTemasByCurso()" required>
+                            <div *ngFor="let curso of cursos">
+                              <mat-option [value]="curso">{{curso.nombre}}</mat-option>
+                            </div>
+                          </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <mat-form-field class="inputCuadro" appearance="outline">
                           <mat-label>Tema</mat-label>
                           <mat-select name="Tema" [(ngModel)]="actividad.tema_id" #Tema="ngModel" required>
                             <div *ngFor="let tema of temas">
