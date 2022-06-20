@@ -16,6 +16,10 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.apiBase}/Usuario`);
   }
 
+  getOtherUsuarios() {
+    return this.http.get<Usuario[]>(`${this.apiBase}/Usuario/usuarios`);
+  }
+
   updateUsuario(usuarioEdit: UsuarioEdit) {
     return this.http.put<Usuario>(`${this.apiBase}/Usuario`, usuarioEdit);
   }

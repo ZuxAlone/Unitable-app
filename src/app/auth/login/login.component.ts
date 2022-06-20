@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       console.log("Init");
       this.userStorageService.set(data);
       console.log("Fin");
-      this.router.navigate(["/admin/usuario-info"]);
+      this.router.navigate(["/admin/actividades"]);
     });
   }
 
