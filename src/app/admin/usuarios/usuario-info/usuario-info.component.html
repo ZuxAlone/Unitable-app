@@ -1,10 +1,11 @@
 <mat-card *ngIf="usuario" class="container mt-5 w-75 bg-light">
     <mat-card-title class="my-3">{{usuario.nombres}} {{usuario.apellidos}}</mat-card-title>
-    <mat-action-row>
-        <button *ngIf="!usuario.isPremium; else notPremium" mat-raised-button color="get" (click)="get_cancel_premium()">Get
+    <mat-divider></mat-divider>
+    <mat-action-row class="d-flex flex-row-reverse">
+        <button class="my-2" *ngIf="!usuario.isPremium; else notPremium" mat-raised-button color="get" (click)="get_cancel_premium()">Get
             Premium</button>
         <ng-template #notPremium>
-            <button mat-raised-button color="cancel" (click)="get_cancel_premium()">Cancel Premium</button>
+            <button class="my-2" mat-raised-button color="cancel" (click)="get_cancel_premium()">Cancel Premium</button>
         </ng-template>
     </mat-action-row>
     <mat-card-content>
@@ -18,8 +19,8 @@
             <p>Tipo de Usuario: Coach</p>
         </ng-template>
     </mat-card-content>
-    <mat-action-row>
-        <button mat-raised-button class="bg-primary text-light" (click)="updateUsuario()">EDITAR PERFIL</button>
+    <mat-action-row class="d-flex flex-row-reverse">
+        <button mat-raised-button class="bg-primary text-light mx-3" (click)="updateUsuario()">EDITAR PERFIL</button>
         <button mat-raised-button color="warn" (click)="deleteUsuario()">ELIMINAR</button>
     </mat-action-row>
 </mat-card>

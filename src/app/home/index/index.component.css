@@ -1,0 +1,7 @@
+.background {
+    background-image: url("../../../assets/fondo.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+}
