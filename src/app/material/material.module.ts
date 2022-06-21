@@ -28,7 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSliderModule } from '@angular/material/slider'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -62,7 +62,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatNativeDateModule,
     MatSliderModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatRadioModule
   ],
   imports: [
     CommonModule

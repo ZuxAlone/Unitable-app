@@ -17,6 +17,7 @@ import { TestActividadComponent } from './actividades/test-actividad/test-activi
 import { ListGrupoComponent } from './grupos/grupos/list-grupo/list-grupo.component';
 import { NewGrupoComponent } from './grupos/grupos/new-grupo/new-grupo.component';
 import { ChatGrupoComponent } from './grupos/grupos/chat-grupo/chat-grupo.component';
+import { AlertViewComponent } from './actividades/shared/alert-view/alert-view.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ChatGrupoComponent } from './grupos/grupos/chat-grupo/chat-grupo.compon
       ListGrupoComponent,
       NewGrupoComponent,
       ChatGrupoComponent,
+      AlertViewComponent,
   ],
   imports: [
     CommonModule,
