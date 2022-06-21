@@ -1,0 +1,94 @@
+<div class="d-flex flex-row" style="margin: 10px;">
+    <button mat-raised-button color="primary" type="button" routerLink = "/admin/grupos">
+        <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+</div>
+
+<div class="col">
+    <h1 class="fw-bold d-flex justify-content-center"> 
+        Nuevo Grupo
+    </h1>
+
+    <div class="d-flex justify-content-center">
+        <form #Createform="ngForm">
+            <div class="row">
+                <div class="d-flex justify-content-center">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput
+                            type="text"
+                            placeholder="Nombre"
+                            [(ngModel)]="grupoRq.nombre"
+                            name = "nombre"
+                            #nombre="ngModel"
+                            required
+                        >
+                        <mat-error *ngIf="nombre.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Descripcion</mat-label>
+                        <input matInput
+                            type="text"
+                            placeholder="Descripcion"
+                            [(ngModel)]="grupoRq.descripcion"
+                            name = "descripcion"
+                            #descripcion="ngModel"
+                            required
+                        >
+                        <mat-error *ngIf="descripcion.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Detalle de chat</mat-label>
+                        <input matInput
+                            type="text"
+                            placeholder="Detalle del Chat"
+                            [(ngModel)]="grupoRq.detalleChat"
+                            name = "detalleChat"
+                            #detalleChat="ngModel"
+                            required
+                        >
+                        <mat-error *ngIf="detalleChat.hasError('required')">
+                            Este campo es obligatorio
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+
+                
+                <div class="d-flex justify-content-center">
+                    <mat-form-field class="inputCuadro" appearance="outline">
+                      <mat-label>Tema</mat-label>
+                      <mat-select name="Tema" [(ngModel)]="tema_select" #tema_s="ngModel" required>
+                        <div *ngFor="let tema of temas">
+                          <mat-option [value]="tema">{{tema.nombre}}</mat-option>
+                        </div>
+                      </mat-select>
+                      <mat-error *ngIf="tema_s.hasError('required')">
+                        Este campo es obligatorio
+                    </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button mat-raised-button type="button" color="primary" class="mt-5 inputFechas" routerLink = "/admin/grupos">
+                        Cancelar
+                    </button>
+
+                    <button mat-raised-button type="button" (click)="crearGrupo()" color="primary" class="mt-5 inputFechas" [disabled]="Createform.invalid" routerLink = "/admin/grupos">
+                        Guardar
+                    </button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+</div>

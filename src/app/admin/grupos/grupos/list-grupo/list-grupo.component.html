@@ -1,0 +1,74 @@
+<div>
+    <div class="d-flex justify-content-between">
+        <label class="text-left fw-bold fs-5">
+            Lista de Grupos
+        </label>
+        <button class="margin" mat-raised-button color="primary" mat-button routerLink='/admin/grupos/nuevo'>
+            Nuevo Grupo
+        </button>
+    </div>
+
+    <div class="grid">
+        <div *ngFor="let grupo of grupos">
+            <mat-card hideToggle class="bg-light">
+                <mat-card-title>
+                    <mat-panel-title class="text-left fw-bold fs-5">
+                        <p>{{grupo.nombre}}</p>
+                    </mat-panel-title>
+                    <mat-panel-description class="text-left fw-bold fs-5">
+                        <p>{{grupo.fechaCreacion | date:'yyyy-MM-dd'}}</p>
+                    </mat-panel-description>
+                </mat-card-title>
+                <p>{{grupo.descripcion}}</p>
+                <mat-card-actions>                
+                    <button mat-button color="primary" [routerLink]="[grupo.id, 'chat']">
+                        <mat-icon>send</mat-icon> Chat
+                    </button>
+                    <button mat-raised-button mat-button color="warn" (click)="deleteGrupo(grupo.id)">
+                        <mat-icon>delete_forever</mat-icon> Eliminar
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+
+    <div *ngIf = "(grupos | json) == '[]'">
+        <label class="text-left" style="margin: 20px;">
+            No estas en ningún grupo, unete a uno o crea uno.
+        </label>
+    </div>
+
+    <br/>
+
+    <label class="text-left  fw-bold fs-5">
+        Grupos recomendados
+    </label>
+
+    <div class="grid">
+        <div *ngFor="let grupo of gruposRec">
+            <mat-card hideToggle class="bg-light">
+                <mat-card-title>
+                    <mat-panel-title class="text-left fw-bold fs-5">
+                        <p>{{grupo.nombre}}</p>
+                    </mat-panel-title>
+                    <mat-panel-description class="text-left fw-bold fs-5">
+                        <p>{{grupo.fechaCreacion | date:'yyyy-MM-dd'}}</p>
+                    </mat-panel-description>
+                </mat-card-title>
+                <p>{{grupo.descripcion}}</p>
+                <mat-card-actions>
+                    <button mat-raised-button mat-button color="primary" (click)="joinGrupo(grupo.id)">
+                        <mat-icon>add_box</mat-icon> Unirse
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+
+    <div *ngIf = "(gruposRec | json) == '[]'">
+        <label class="text-left" style="margin: 20px;">
+            No hay grupos para recomendar
+        </label>
+    </div>
+
+</div>

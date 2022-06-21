@@ -1,0 +1,53 @@
+<div class="d-flex flex-row" style="margin: 10px;">
+    <button mat-raised-button color="primary" type="button" routerLink = "/admin/grupos">
+        <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+</div>
+
+<div *ngIf="grupo">
+    <div class="grid">
+        <mat-card hideToggle class="fw-bold">
+            <mat-panel-title class="text-left fw-bold fs-5">
+                <p>{{grupo.nombre}}</p>
+            </mat-panel-title>
+            <mat-divider></mat-divider>
+            <mat-panel-description class="text-left fw-bold fs-5">
+                <p>{{grupo.fechaCreacion | date:'yyyy-MM-dd'}}</p>
+            </mat-panel-description>
+            <mat-panel-description class="text-left">
+                <p>{{grupo.descripcion}}</p>
+            </mat-panel-description>
+        </mat-card>
+        <div>
+
+            <h4>Chat del grupo "{{grupo.nombre}}"</h4>
+            <div>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Message</mat-label>
+                    <input matInput [(ngModel)]="mensaje" maxlength="256" placeholder="Escribe un mensaje">
+                </mat-form-field>
+                <button mat-raised-button mat-button color="primary" (click)="enviarMensaje()"><mat-icon>send</mat-icon></button>
+            </div>
+
+            <div *ngFor="let mensaje of mensajes">
+                <mat-card hideToggle class="bg-light">
+                    <mat-card-title>
+                        <div *ngIf="usuario.id==mensaje.usuarioId; else otherMessage">
+                            <div class="float-right" >
+                                Yo: {{mensaje.mensajeTexto}}
+                            </div>
+                        </div>
+                        <ng-template #otherMessage>
+                            <div class="float-right">
+                                {{mensaje.mensajeTexto}}
+                            </div>
+                        </ng-template>
+                    </mat-card-title>
+                </mat-card>
+            </div>
+        </div>
+        <div>
+            Usuarios
+        </div>
+    </div>
+</div>

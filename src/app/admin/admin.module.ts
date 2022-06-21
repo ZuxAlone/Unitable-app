@@ -14,6 +14,9 @@ import { ListViewComponent } from './actividades/shared/list-view/list-view.comp
 import { UsuarioEditComponent } from './usuarios/usuario-edit/usuario-edit.component';
 import { UsuarioListComponent } from './usuarios/usuario-list/usuario-list.component';
 import { TestActividadComponent } from './actividades/test-actividad/test-actividad.component';
+import { ListGrupoComponent } from './grupos/grupos/list-grupo/list-grupo.component';
+import { NewGrupoComponent } from './grupos/grupos/new-grupo/new-grupo.component';
+import { ChatGrupoComponent } from './grupos/grupos/chat-grupo/chat-grupo.component';
 
 
 @NgModule({
@@ -29,6 +32,9 @@ import { TestActividadComponent } from './actividades/test-actividad/test-activi
       UsuarioEditComponent,
       UsuarioListComponent,
       TestActividadComponent,
+      ListGrupoComponent,
+      NewGrupoComponent,
+      ChatGrupoComponent,
   ],
   imports: [
     CommonModule,
