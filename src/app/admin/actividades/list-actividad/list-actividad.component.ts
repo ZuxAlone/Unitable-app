@@ -48,7 +48,7 @@ export class ListActividadComponent implements OnInit {
   }
 
   opentTestDialog(id:number){
-    const dialogRef = this.dialog.open(TestActividadComponent,{width: '500px', height: '500px', data:{id:id},});
+    const dialogRef = this.dialog.open(TestActividadComponent,{width: '800px', height: '800px', data:{id:id},});
 
     dialogRef.afterClosed().subscribe((result: any) => {
       console.log(`Dialog result: ${result}`);

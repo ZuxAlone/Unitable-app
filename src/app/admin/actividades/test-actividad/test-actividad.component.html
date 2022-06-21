@@ -5,4 +5,24 @@
     <p class="d-flex justify-content-center">
         {{test.descripcion}}
     </p>
+    
+    <div class="row">
+        <div  *ngFor="let lst_respuesta of respuestas; index as i">
+            <div class="d-flex justify-content-start font">
+                <label id="preguntas[i].id">Pregunta {{i+1}}) {{preguntas[i].preguntaText}}</label>
+            </div>
+            <mat-radio-group
+            aria-labelledby="preguntas[i].id"
+            class="example-radio-group"
+            [(ngModel)]="verificar[i]">
+                <mat-radio-button class="example-radio-button font" *ngFor="let respuesta of lst_respuesta" [value]="respuesta.isCorrect">
+                    {{respuesta.respuestaText}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <button mat-raised-button color="accent" (click)="TestResultado(verificar)">Enviar</button>
+    </div>
 </div>

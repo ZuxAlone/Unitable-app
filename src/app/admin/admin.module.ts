@@ -14,6 +14,7 @@ import { ListViewComponent } from './actividades/shared/list-view/list-view.comp
 import { UsuarioEditComponent } from './usuarios/usuario-edit/usuario-edit.component';
 import { UsuarioListComponent } from './usuarios/usuario-list/usuario-list.component';
 import { TestActividadComponent } from './actividades/test-actividad/test-actividad.component';
+import { AlertViewComponent } from './actividades/shared/alert-view/alert-view.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { TestActividadComponent } from './actividades/test-actividad/test-activi
       UsuarioEditComponent,
       UsuarioListComponent,
       TestActividadComponent,
+      AlertViewComponent,
   ],
   imports: [
     CommonModule,
