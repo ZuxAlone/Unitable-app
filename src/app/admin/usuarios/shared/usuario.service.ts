@@ -16,8 +16,12 @@ export class UsuarioService {
     return this.http.get<Usuario>(`${this.apiBase}/Usuario`);
   }
 
+  getFollowedUsuarios() {
+    return this.http.get<Usuario[]>(`${this.apiBase}/Usuario/followed`);
+  }
+
   getOtherUsuarios() {
-    return this.http.get<Usuario[]>(`${this.apiBase}/Usuario/usuarios`);
+    return this.http.get<Usuario[]>(`${this.apiBase}/Usuario/others`);
   }
 
   updateUsuario(usuarioEdit: UsuarioEdit) {
@@ -30,6 +34,10 @@ export class UsuarioService {
 
   get_cancel_premium() {
     return this.http.put<any>(`${this.apiBase}/Usuario/premium`, {});
+  }
+
+  followUsuario(followedId: number) {
+    return this.http.put<any>(`${this.apiBase}/Usuario/follow/${followedId}`, {});
   }
 
 }
