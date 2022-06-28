@@ -7,6 +7,8 @@ import { ChatGrupoComponent } from './grupos/grupos/chat-grupo/chat-grupo.compon
 import { ListGrupoComponent } from './grupos/grupos/list-grupo/list-grupo.component';
 import { NewGrupoComponent } from './grupos/grupos/new-grupo/new-grupo.component';
 import { LayoutComponent } from './layout/layout.component';
+import { ListRecompensasaComponent } from './recompensas/list-recompensasa/list-recompensasa.component';
+import { TiendaRecompensasComponent } from './recompensas/tienda-recompensas/tienda-recompensas.component';
 import { UsuarioInfoComponent } from './usuarios/usuario-info/usuario-info.component';
 import { UsuarioListComponent } from './usuarios/usuario-list/usuario-list.component';
 
@@ -46,6 +48,14 @@ const routes: Routes = [
       {
         path:'grupos/:id/chat',
         component:ChatGrupoComponent,
+      },
+      {
+        path:'recompensas',
+        component:TiendaRecompensasComponent,
+      },
+      {
+        path:'recompensas/usuario',
+        component:ListRecompensasaComponent,
       },
     ]
   }

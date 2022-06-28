@@ -35,8 +35,12 @@ export class ActividadService {
     return this.http.put(`${this.apiBase}/Actividad/${id}`, actividadReq)
   }
 
-  terminarActividad(id:number, actividadReq:ActividadReq){
-    return this.http.put(`${this.apiBase}/Actividad/finish/${id}`, actividadReq)
+  goToTest(id:number, actividadReq:ActividadReq){
+    return this.http.put(`${this.apiBase}/Actividad/test/${id}`, actividadReq)
+  }
+  
+  terminarActividad(id:number, aprobo:boolean, actividadReq:any){
+    return this.http.put(`${this.apiBase}/Actividad/finish/${id}?verificar=${aprobo}`, actividadReq)
   }
 
   getTest(id: number){
