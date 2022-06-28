@@ -18,6 +18,8 @@ import { ListGrupoComponent } from './grupos/grupos/list-grupo/list-grupo.compon
 import { NewGrupoComponent } from './grupos/grupos/new-grupo/new-grupo.component';
 import { ChatGrupoComponent } from './grupos/grupos/chat-grupo/chat-grupo.component';
 import { AlertViewComponent } from './actividades/shared/alert-view/alert-view.component';
+import { TiendaRecompensasComponent } from './recompensas/tienda-recompensas/tienda-recompensas.component';
+import { ListRecompensasaComponent } from './recompensas/list-recompensasa/list-recompensasa.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { AlertViewComponent } from './actividades/shared/alert-view/alert-view.c
       NewGrupoComponent,
       ChatGrupoComponent,
       AlertViewComponent,
+      TiendaRecompensasComponent,
+      ListRecompensasaComponent,
   ],
   imports: [
     CommonModule,

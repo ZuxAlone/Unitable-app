@@ -69,29 +69,52 @@ export class TestActividadComponent implements OnInit {
     this.actividadService.TestResultado(boolean)
     .subscribe((data:any)=>{
       this.percent = data;
-      
+      let verf = [];
+      let resp = [];
+
       let cont = 0;
       for(let i = 0; i < this.verificar.length; i++){
         if(this.verificar[i] == true){
           cont++;
         }
       }
+
+      for(let i = 0; i < this.verificar.length; i++){
+        if(this.verificar[i] == false){
+          verf.push("La respuesta marcada es incorrecta")
+        }
+        else{
+          verf.push("La respuesta marcada es correcta")
+        }
+      }
+  
+      for(let i = 0; i < this.respuestas.length; i++){
+          for(let j = 0; j < this.respuestas[i].length; j++){
+            if(this.respuestas[i][j].isCorrect == true){
+              resp.push(this.respuestas[i][j])
+            }
+            else{
+              continue;
+            }
+          }
+      }
+
       if(this.percent >= 75){
         this.opentResultDialog("Resultados del test", 
           "Haz obtenido "+ cont.toString() +" respuestas correctas", " Obtuviste un "+ this.percent.toString() +"% de respuestas correctas",
-          "APROBASTE")
+          "APROBASTE",this.preguntas,resp,verf)
       }
       else{
         this.opentResultDialog("Resultados del test", 
           "Haz obtenido "+ cont.toString() +" respuestas correctas", "Obtuviste un "+ this.percent.toString() +"% de respuestas correctas",
-          "DESAPROBASTE")
+          "DESAPROBASTE",this.preguntas,resp,verf)
       }
       this.onNoClick();
     })
   }
 
-  opentResultDialog(titulo:any, msgI:any, msgF:any, msg_final:any){
-    const dialogRef = this.dialog.open(AlertViewComponent,{width: '400px', height: '250px', data:{titulo: titulo, msgI:msgI, msgF:msgF, msg_final:msg_final},});
+  opentResultDialog(titulo:any, msgI:any, msgF:any, msg_final:any,preg:any,resp:any,verf:any){
+    const dialogRef = this.dialog.open(AlertViewComponent,{width: '400px', height: '700px', data:{titulo: titulo, msgI:msgI, msgF:msgF, msg_final:msg_final, preg:preg, resp:resp, verf:verf},});
 
     dialogRef.afterClosed().subscribe((result: any) => {
       console.log(`Dialog result: ${result}`);

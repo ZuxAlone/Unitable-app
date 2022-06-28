@@ -1,23 +1,47 @@
 <div class="row">
     <h1 class="fw-bold d-flex justify-content-center"> 
-        {{data.titulo}}
+        {{titulo}}
     </h1>
     <p class="d-flex justify-content-center descripcion">
-        {{data.msgI}}
+        {{msgI}}
     </p>   
     <p class="d-flex justify-content-center descripcion">
-        {{data.msgF}}
-    </p>  
+        {{msgF}}
+    </p>
+    
+    <div class="row">
+        <div  *ngFor="let pregunta of preg; index as i">
+            <div class="d-flex justify-content-start font">
+                <label id="preguntas[i].id">Pregunta {{i+1}}) {{pregunta.preguntaText}}</label>
+            </div>
+            <div class="d-flex justify-content-center" *ngIf = "verf[i] == 'La respuesta marcada es correcta'">
+                <p class="msgFinal text-success">
+                    {{verf[i]}}
+                </p>
+            </div>
+            <div class="d-flex justify-content-center" *ngIf = "verf[i] == 'La respuesta marcada es incorrecta'">
+                <p class="msgFinal text-danger">
+                    {{verf[i]}}
+                </p>
+            </div>
+            <div class="d-flex justify-content-center">
+                <p>
+                    Respuesta Correcta: {{resp[i].respuestaText}}
+                </p>
+            </div>
+        </div>
+    </div>
+
     <div class="d-flex justify-content-center" 
         *ngIf = "data.msg_final == 'APROBASTE'">
         <p class="msgFinal text-success">
-            {{data.msg_final}}:+ 20 COINS
+            {{msg_final}}:+ 20 COINS
         </p>
     </div>
     <div class="d-flex justify-content-center" 
         *ngIf = "data.msg_final == 'DESAPROBASTE'">
         <p class="msgFinal text-danger">
-            {{data.msg_final}}: + 0 COINS
+            {{msg_final}}: + 0 COINS
         </p>
     </div>
     <div class="d-flex justify-content-center">

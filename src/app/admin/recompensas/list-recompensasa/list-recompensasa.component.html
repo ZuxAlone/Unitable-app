@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between">
+    <label class="text-left bold">
+        Mis Recompensas
+    </label>
+</div>
+<div *ngIf="(recompensas | json) != '[]'">
+    <div class="grid">
+        <div *ngFor="let recompensa of recompensas" class="my-4 px-3">
+            <mat-card hideToggle class="bg-light">
+                <mat-card-title>
+                    <mat-panel-title class="text-left fw-bold fs-5">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p>{{recompensa.nombre}}</p>
+                        </div>
+                    </mat-panel-title>
+                </mat-card-title>
+                
+                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+
+                <mat-card-content>
+                    <p>Descripcion: {{recompensa.detalle}}</p>
+                    <p>Precio     : {{recompensa.precioMon}}</p>
+                </mat-card-content>
+
+                <mat-card-actions class="d-flex justify-content-end">
+                    <button mat-raised-button mat-button color="warn" (click)="deleteRecompensa(recompensa.id, recompensa.nombre)">
+                        Eliminar <mat-icon>delete_forever</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>
+<div *ngIf="(recompensas | json) == '[]'">
+    <label class="text-left" style="margin: 20px;">
+        Sin resultados
+    </label>
+</div>
