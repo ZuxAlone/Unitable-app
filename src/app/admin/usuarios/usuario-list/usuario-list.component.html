@@ -1,25 +1,101 @@
 <div class="container-sm mt-5">
-    <div class="d-flex justify-content-between align-items-center">
-        <label class="fs-2 fw-bold text-left bold">
-            Usuarios de Unitable
+    <div class="d-flex align-items-center">
+        <label class="me-auto fs-2 fw-bold text-left bold">
+            Usuarios que sigues
+        </label>
+        <p class="fs-5">Buscar usuario:</p>
+        <mat-form-field appearance="fill" class="d-block ms-3 w-25 p-3">
+            <mat-label>Filtro</mat-label>
+            <input matInput type="text" placeholder="Filtro" name="filtro" [(ngModel)]="followedFilter" #filtro="ngModel" (ngModelChange)="filterFollowedUsuarios(followedFilter)"/>
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="(usuariosFollowed | json) != '[]'">
+        <div *ngIf="(usuariosFollowedFiltered | json) != '[]'">
+            <div class="grid">
+                <div *ngFor="let usuario of usuariosFollowedFiltered" class="my-4 px-3">
+                    <mat-card hideToggle class="bg-light">
+                        <mat-card-title>
+                            <mat-panel-title class="text-left fw-bold fs-5">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p>{{usuario.nombres}} {{usuario.apellidos}}</p>
+                                    <button mat-raised-button mat-button type="button" class="btn btn-danger px-2" (click)="followUsuario(usuario.id)">
+                                        <mat-icon>remove_circle</mat-icon> Unfollow
+                                    </button>
+                                </div>
+                            </mat-panel-title>
+                        </mat-card-title>
+                        <p>Correo: {{usuario.correo}}</p>
+                        <p>Número de monedas: {{usuario.numMonedas}}</p>
+                        <p *ngIf="!usuario.tipo; else coach">Tipo de Usuario: Estudiante</p>
+                        <ng-template #coach>
+                            <p>Tipo de Usuario: Coach</p>
+                        </ng-template>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="(usuariosFollowedFiltered | json) == '[]'">
+            <label class="text-left" style="margin: 20px;">
+                Sin resultados
+            </label>
+        </div>
+    </div>
+
+    <div *ngIf="(usuariosFollowed | json) == '[]'">
+        <label class="text-left" style="margin: 20px;">
+            Busca a quíenes te gustaría seguir!
         </label>
     </div>
 
-    <div class="grid">
-        <div *ngFor="let usuario of usuarios" class="my-4 px-3">
-            <mat-card hideToggle class="bg-light">
-                <mat-card-title>
-                    <mat-panel-title class="text-left fw-bold fs-5">
-                        <p>{{usuario.nombres}} {{usuario.apellidos}}</p>
-                    </mat-panel-title>
-                </mat-card-title>
-                <p>Correo: {{usuario.correo}}</p>
-                <p>Número de monedas: {{usuario.numMonedas}}</p>
-                <p *ngIf="!usuario.tipo; else coach">Tipo de Usuario: Estudiante</p>
-                <ng-template #coach>
-                    <p>Tipo de Usuario: Coach</p>
-                </ng-template>
-            </mat-card>
+    <mat-divider></mat-divider>
+
+    <div *ngIf="(usuariosOthers | json) != '[]'">
+        <div class="d-flex align-items-center mt-4">
+            <label class="me-auto fs-2 fw-bold text-left bold">
+                Otros usuarios de Unitable
+            </label>
+            <p class="fs-5">Buscar usuario:</p>
+            <mat-form-field appearance="fill" class="d-block ms-3 w-25 p-3">
+                <mat-label>Filtro</mat-label>
+                <input matInput type="text" placeholder="Filtro" name="filtro" [(ngModel)]="othersFilter" #filtro="ngModel" (ngModelChange)="filterOtherUsuarios(othersFilter)"/>
+            </mat-form-field>
         </div>
+
+        <div *ngIf="(usuariosOthersFiltered | json) != '[]'">
+            <div class="grid">
+                <div *ngFor="let usuario of usuariosOthersFiltered" class="my-4 px-3">
+                    <mat-card hideToggle class="bg-light">
+                        <mat-card-title>
+                            <mat-panel-title class="text-left fw-bold fs-5">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p>{{usuario.nombres}} {{usuario.apellidos}}</p>
+                                    <button mat-raised-button mat-button color="primary" (click)="followUsuario(usuario.id)">
+                                        <mat-icon>person_add</mat-icon> Follow
+                                    </button>
+                                </div>
+                            </mat-panel-title>
+                        </mat-card-title>
+                        <p>Correo: {{usuario.correo}}</p>
+                        <p>Número de monedas: {{usuario.numMonedas}}</p>
+                        <p *ngIf="!usuario.tipo; else coach">Tipo de Usuario: Estudiante</p>
+                        <ng-template #coach>
+                            <p>Tipo de Usuario: Coach</p>
+                        </ng-template>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="(usuariosOthersFiltered | json) == '[]'">
+            <label class="text-left" style="margin: 20px;">
+                Sin resultados
+            </label>
+        </div>
+    </div>
+
+    <div *ngIf="(usuariosOthers | json) == '[]'">
+        <label class="text-left" style="margin: 20px;">
+            Ya no existen más usuarios aquí :o
+        </label>
     </div>
 </div>

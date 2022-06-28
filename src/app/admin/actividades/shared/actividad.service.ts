@@ -54,4 +54,8 @@ export class ActividadService {
   TestResultado(boolean:boolean[]){
     return this.http.post(`${this.apiBase}/Test/resultado`, boolean)
   }
+
+  getTemaById(id: number){
+    return this.http.get<Tema>(`${this.apiBase}/Tema/tema/${id}`)
+  }
 }

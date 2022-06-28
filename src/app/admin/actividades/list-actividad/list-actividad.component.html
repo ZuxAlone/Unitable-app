@@ -8,31 +8,119 @@
         </button>
     </div>
 
-    <div *ngFor="let actividad of actividades">
-        <mat-expansion-panel style="background-color: rgb(247, 243, 211);">
-            <mat-expansion-panel-header>
-              <mat-panel-title class="text-end" style="font-size: 20px;">
-                {{actividad.nombre}}
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <p>Detalles: {{actividad.detalle}}</p>
-            <p>Fecha de inicio: {{actividad.horaIni}}</p>
-            <p>Fecha de fin: {{actividad.horaFin}}</p>
-            <!--<p>Tema: {{actividad.tema}}</p>-->
-            <p>Activa: {{actividad.activa}}</p>
-            <mat-action-row>
-                <div class="d-flex justify-content-between" style="width: 100%;">
-                    <div>
-                        <button mat-raised-button color="accent" (click)="terminarActividad(actividad.id, actividad)" [disabled]="!actividad.activa">TERMINAR</button>
+    <div *ngIf = "(actividades | json) != '[]'">
+        <div class="d-flex justify-content-center">
+            <mat-form-field class="inputFiltro" appearance="outline">
+              <mat-label>Filtrado</mat-label>
+              <mat-select name="filtro" [(ngModel)]="opcionFiltro" #filtro="ngModel" (selectionChange)="filtrarActividadesPor(opcionFiltro)" required>
+                  <mat-option value="Todo">Todo</mat-option>
+                  <mat-option value="Filtrar por fecha de inicio mas antigua">Filtrar por fecha de inicio mas antigua</mat-option>
+                  <mat-option value="Filtrar por fecha de inicio mas reciente">Filtrar por fecha de inicio mas reciente</mat-option>
+                  <mat-option value="Filtrar por rango de fechas">Filtrar por rango de fechas</mat-option>
+                  <mat-option value="Filtrar por Tema">Filtrar por Tema</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf = "opcionFiltro == 'Filtrar por Tema'">
+            <div class="d-flex justify-content-center">
+                <mat-form-field class="inputCuadros" appearance="outline">
+                  <mat-label>Curso</mat-label>
+                  <mat-select name="Curso" [(ngModel)]="cursito" #Curso="ngModel" (selectionChange)="getTemasByCurso()" required>
+                    <div *ngFor="let curso of cursos">
+                      <mat-option [value]="curso">{{curso.nombre}}</mat-option>
                     </div>
-                    <div>
-                        <button mat-raised-button color="warn" (click)="deleteActividad(actividad.id, actividad.nombre)">ELIMINAR</button>
-                        <button mat-raised-button color="primary" mat-button [routerLink]="[actividad.id, 'editar']" [disabled]="!actividad.activa">EDITAR</button>
+                  </mat-select>
+                </mat-form-field>
+
+                <div class="area_botones"></div>
+
+                <mat-form-field class="inputCuadros" appearance="outline">
+                    <mat-label>Tema</mat-label>
+                    <mat-select name="Tema" [(ngModel)]="temaElegido" #Tema="ngModel" (selectionChange)="filtrarActividadesPor(opcionFiltro)" required>
+                      <div *ngFor="let tema of temas">
+                        <mat-option [value]="tema.nombre">{{tema.nombre}}</mat-option>
+                      </div>
+                    </mat-select>
+                  </mat-form-field>
+            </div>  
+        </div>
+
+        <div *ngIf = "opcionFiltro == 'Filtrar por rango de fechas'">
+            <div class="d-flex justify-content-center">
+
+                <mat-form-field class="inputFechas" appearance="outline">
+                    <mat-label>Fecha de Inicio</mat-label>
+                    <input matInput
+                        type="date"
+                        placeholder="Fecha de Inicio"
+                        [(ngModel)]="NfechaIni"
+                        name = "fecha_ini"
+                        #fecha_ini="ngModel"
+                        required
+                    >
+                    <mat-error *ngIf="fecha_ini.hasError('required')">
+                        Este campo es obligatorio
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="area_fechas"></div>
+
+                <mat-form-field class="inputFechas" appearance="outline">
+                    <mat-label>Fecha de Fin</mat-label>
+                    <input matInput
+                        type="date"
+                        placeholder="Fecha de Fin"
+                        [(ngModel)]="NfechaFin"
+                        name = "fecha_fin"
+                        #fecha_fin="ngModel"
+                        required
+                    >
+                    <mat-error *ngIf="fecha_fin.hasError('required')">
+                        Este campo es obligatorio
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="area_fechas"></div>
+
+                <button mat-raised-button type="button" (click)="filtrarActividadesPor('Filtrar por rango de fechas')" color="primary" class="boton" appearance="outline">
+                    Filtrar
+                </button>
+            </div>
+        </div>
+
+        <div *ngFor="let actividad of actividadesFiltradas">
+            <mat-expansion-panel style="background-color: rgb(247, 243, 211);">
+                <mat-expansion-panel-header>
+                  <mat-panel-title class="text-end" style="font-size: 20px;">
+                    {{actividad.nombre}}
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>Detalles: {{actividad.detalle}}</p>
+                <p>Fecha de inicio: {{actividad.horaIni}}</p>
+                <p>Fecha de fin: {{actividad.horaFin}}</p>
+                <p>Tema: {{actividad.tema.nombre}}</p>
+                <p>Activa: {{actividad.activa}}</p>
+                <mat-action-row>
+                    <div class="d-flex justify-content-between" style="width: 100%;">
+                        <div>
+                            <button mat-raised-button color="accent" (click)="terminarActividad(actividad.id, actividad)" [disabled]="!actividad.activa">TERMINAR</button>
+                        </div>
+                        <div>
+                            <button mat-raised-button color="warn" (click)="deleteActividad(actividad.id, actividad.nombre)">ELIMINAR</button>
+                            <button mat-raised-button color="primary" mat-button [routerLink]="[actividad.id, 'editar']" [disabled]="!actividad.activa">EDITAR</button>
+                        </div>
                     </div>
-                </div>
-            </mat-action-row>
-            
-        </mat-expansion-panel>
+                </mat-action-row>
+                
+            </mat-expansion-panel>
+        </div>
+
+        <div *ngIf = "(actividadesFiltradas | json) == '[]'">
+            <label class="text-left" style="margin: 20px;">
+                No tienes actividades en esta eleccion de filtro.
+            </label>
+        </div>
     </div>
 
     <div *ngIf = "(actividades | json) == '[]'">

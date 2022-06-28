@@ -11,3 +11,27 @@ mat-expansion-panel{
 .margin{
     margin: 10px;
 }
+
+.inputFiltro{
+    width: 70%;
+}
+
+.inputCuadros{
+    width: 30%;
+}
+
+.inputFechas{
+    width: 25%;
+}
+
+.boton{
+    width: 10%;
+}
+
+.area_botones{
+    width: 10% !important;
+}
+
+.area_fechas{
+    width: 2% !important;
+}

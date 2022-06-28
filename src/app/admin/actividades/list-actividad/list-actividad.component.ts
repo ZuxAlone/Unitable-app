@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { EditActividadComponent } from '../edit-actividad/edit-actividad.component';
 import { NewActividadComponent } from '../new-actividad/new-actividad.component';
-import { Actividad, ActividadReq } from '../shared/actividad.model';
+import { Actividad, ActividadReq, Curso, Tema } from '../shared/actividad.model';
 import { ActividadService } from '../shared/actividad.service';
 import { TestActividadComponent } from '../test-actividad/test-actividad.component';
 
@@ -15,19 +15,42 @@ import { TestActividadComponent } from '../test-actividad/test-actividad.compone
 export class ListActividadComponent implements OnInit {
 
   actividades: Actividad[] = [];
+  temas: Tema[] = [];
+  cursos: Curso[] = [];
+  cursito!: Curso;
   testId!: number;
+  tema!: Tema;
+
+  actividadesFiltradas: Actividad[] = [];
+  opcionFiltro: string = "Todo";
+
+  NfechaIni: number = Date.now();
+  NfechaFin: number = Date.now();
+
+  fechaIni: Date = new Date(0);
+  fechaFin: Date = new Date(0);
+
+  temaElegido!: string;
 
   constructor(private actividadService:ActividadService, public dialog: MatDialog, private router:Router) {
    }
 
   ngOnInit(): void {
     this.getAll();
+    this.getAllCursos();
   }
 
   getAll():void{
     this.actividadService.getAll()
     .subscribe((data:Actividad[])=>{
-      this.actividades = data;})
+      this.actividades = data;
+
+      for(let i = 0; i < this.actividades.length; i++){
+        this.replaceTemaById(this.actividades[i].temaId, i);
+      }
+
+      this.filtrarActividadesPor(this.opcionFiltro);
+    })
   }
 
   openDialog() {
@@ -82,5 +105,92 @@ export class ListActividadComponent implements OnInit {
         this.opentTestDialog(this.testId);
       });
     }
+  }
+
+  replaceTemaById(id: number, index: number){
+    this.actividadService.getTemaById(id)
+    .subscribe((data:Tema)=>{
+      this.tema = data;
+      this.actividades[index].tema = this.tema;
+    })
+  }
+
+  filtrarActividadesPor(opcion: string){
+    if(opcion == "Todo"){
+      this.actividadesFiltradas = [];
+      this.actividadesFiltradas = this.actividades;
+    }
+    else if(opcion == "Filtrar por fecha de inicio mas antigua"){
+      this.actividadesFiltradas = [];
+      this.actividadesFiltradas = this.actividades;
+
+      this.actividadesFiltradas.sort(function (a, b) { 
+        var firstDate = new Date(a.horaIni),
+          SecondDate = new Date(b.horaIni);
+          
+        if (firstDate < SecondDate) return -1;
+        if (firstDate > SecondDate) return 1;
+        return 0;
+      })
+    }
+    else if(opcion == "Filtrar por fecha de inicio mas reciente"){
+      this.actividadesFiltradas = [];
+      this.actividadesFiltradas = this.actividades;
+
+      this.actividadesFiltradas.sort(function (a, b) { 
+        var firstDate = new Date(a.horaIni),
+          SecondDate = new Date(b.horaIni);
+          
+        if (firstDate < SecondDate) return 1;
+        if (firstDate > SecondDate) return -1;
+        return 0;
+      })
+    }
+    else if(opcion == "Filtrar por rango de fechas"){
+      this.actividadesFiltradas = [];
+
+      let inidate = String(this.NfechaIni).split("-").map(Number);
+      let findate = String(this.NfechaFin).split("-").map(Number);
+
+      this.fechaIni.setFullYear(inidate[0], inidate[1], inidate[2]);
+      this.fechaIni.setUTCHours(0,0,0);
+      this.fechaFin.setFullYear(findate[0], findate[1], findate[2]);
+      this.fechaFin.setUTCHours(0,0,0);
+
+      //console.log(this.fechaIni.getFullYear().toString() + "/" + this.fechaIni.getMonth().toString() + "/" + this.fechaIni.getDay().toString());
+      //console.log(this.fechaFin.getFullYear().toString() + "/" + this.fechaFin.getMonth().toString() + "/" + this.fechaFin.getDay().toString());
+
+      for(let i = 0; i < this.actividades.length; i++){
+        var horaIni = new Date(this.actividades[i].horaIni),
+        horaFin = new Date(this.actividades[i].horaFin);
+
+        if(this.fechaIni < horaIni && this.fechaFin > horaIni && this.fechaIni < horaFin && this.fechaFin > horaFin){
+          this.actividadesFiltradas.push(this.actividades[i]);
+        }
+      }
+    }
+    else if(opcion == "Filtrar por Tema"){
+      this.actividadesFiltradas = [];
+
+      for(let i = 0; i < this.actividades.length; i++){
+        if(this.actividades[i].tema.nombre == this.temaElegido){
+          this.actividadesFiltradas.push(this.actividades[i]);
+        }
+      }
+    }
+  }
+
+  getTemasByCurso():void{
+    this.actividadService.getTemasByCurso(this.cursito.id)
+    .subscribe((data:any)=>{
+      this.temas = data;
+    })
+  }
+
+  getAllCursos():void{
+    this.actividadService.getAllCursos()
+    .subscribe((data:any)=>{
+      this.cursos = data;
+    })
   }
 }
