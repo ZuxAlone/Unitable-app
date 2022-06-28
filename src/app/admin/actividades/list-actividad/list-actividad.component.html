@@ -104,7 +104,7 @@
                 <mat-action-row>
                     <div class="d-flex justify-content-between" style="width: 100%;">
                         <div>
-                            <button mat-raised-button color="accent" (click)="terminarActividad(actividad.id, actividad)" [disabled]="!actividad.activa">TERMINAR</button>
+                            <button mat-raised-button color="accent" (click)="goToTest(actividad.id, actividad)" [disabled]="!actividad.activa">TERMINAR</button>
                         </div>
                         <div>
                             <button mat-raised-button color="warn" (click)="deleteActividad(actividad.id, actividad.nombre)">ELIMINAR</button>

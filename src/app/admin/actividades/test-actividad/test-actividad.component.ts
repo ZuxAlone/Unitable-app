@@ -1,5 +1,5 @@
 import { AlertViewComponent } from './../shared/alert-view/alert-view.component';
-import { Pregunta, Respuesta } from './../shared/actividad.model';
+import { Pregunta, Respuesta, Actividad, ActividadReq } from './../shared/actividad.model';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Test } from '../shared/actividad.model';
@@ -36,10 +36,8 @@ export class TestActividadComponent implements OnInit {
   getTest(id:number){
     this.actividadService.getTest(id)
     .subscribe((data:Test)=>{
-      console.log(data);
       this.test.nombre = data.nombre;
       this.test.descripcion = data.descripcion;
-      console.log(this.test);
     })
   }
 
@@ -47,8 +45,6 @@ export class TestActividadComponent implements OnInit {
     this.actividadService.getPreguntasByTest(id)
     .subscribe((data:any)=>{
       this.preguntas = data;
-      console.log(data)
-      console.log(this.preguntas)
 
       for(let i = 0; i < this.preguntas.length; i++){
         this.getRespuestasByPregunta(this.preguntas[i].id)
@@ -60,8 +56,6 @@ export class TestActividadComponent implements OnInit {
     this.actividadService.getRespuestasByPregunta(id)
     .subscribe((data:any)=>{
       this.respuestas.push(data)
-      console.log(data)
-      console.log(this.respuestas)
     })
   }
 
@@ -100,11 +94,14 @@ export class TestActividadComponent implements OnInit {
       }
 
       if(this.percent >= 75){
+        this.terminarActividad(this.data.actividadId,true,this.data.actividadReq)
+        
         this.opentResultDialog("Resultados del test", 
           "Haz obtenido "+ cont.toString() +" respuestas correctas", " Obtuviste un "+ this.percent.toString() +"% de respuestas correctas",
           "APROBASTE",this.preguntas,resp,verf)
       }
       else{
+        this.terminarActividad(this.data.actividadId,false,this.data.actividadReq)
         this.opentResultDialog("Resultados del test", 
           "Haz obtenido "+ cont.toString() +" respuestas correctas", "Obtuviste un "+ this.percent.toString() +"% de respuestas correctas",
           "DESAPROBASTE",this.preguntas,resp,verf)
@@ -113,12 +110,15 @@ export class TestActividadComponent implements OnInit {
     })
   }
 
+  terminarActividad(id:number, aprobo:boolean, actividadReq:any){
+      this.actividadService.terminarActividad(id, aprobo, actividadReq)
+      .subscribe((data: any)=>{
+      });
+  }
+
   opentResultDialog(titulo:any, msgI:any, msgF:any, msg_final:any,preg:any,resp:any,verf:any){
     const dialogRef = this.dialog.open(AlertViewComponent,{width: '400px', height: '700px', data:{titulo: titulo, msgI:msgI, msgF:msgF, msg_final:msg_final, preg:preg, resp:resp, verf:verf},});
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
   onNoClick(): void {

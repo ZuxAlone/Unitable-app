@@ -70,12 +70,9 @@ export class ListActividadComponent implements OnInit {
     });
   }
 
-  opentTestDialog(id:number){
-    const dialogRef = this.dialog.open(TestActividadComponent,{width: '800px', height: '800px', data:{id:id},});
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      console.log(`Dialog result: ${result}`);
-    });
+  opentTestDialog(id:number, actividadId:number, actividadReq:any){
+    const dialogRef = this.dialog.open(TestActividadComponent,{width: '800px', height: '800px', data:{id:id, actividadId:actividadId,actividad:{nombre: actividadReq.nombre, 
+      detalles: actividadReq.detalles, fecha_ini: actividadReq.fecha_ini, fecha_fin: actividadReq.fecha_fin}},});
   }
 
   deleteActividad(id:number, name:string){
@@ -91,10 +88,10 @@ export class ListActividadComponent implements OnInit {
     }
   }
 
-  terminarActividad(id:number, actividad:ActividadReq){
+  goToTest(id:number, actividad:ActividadReq){
     const ok = confirm(`¿Estas seguro de terminar la actividad '${actividad.nombre}'?`);
     if(ok){
-      this.actividadService.terminarActividad(id, actividad)
+      this.actividadService.goToTest(id, actividad)
       .subscribe((data: any)=>{
         this.testId = data as number
         let currentUrl = this.router.url;
@@ -102,7 +99,7 @@ export class ListActividadComponent implements OnInit {
         this.router.onSameUrlNavigation = 'reload';
         this.router.navigate([currentUrl]);
 
-        this.opentTestDialog(this.testId);
+        this.opentTestDialog(this.testId, id, actividad);
       });
     }
   }
@@ -110,8 +107,7 @@ export class ListActividadComponent implements OnInit {
   replaceTemaById(id: number, index: number){
     this.actividadService.getTemaById(id)
     .subscribe((data:Tema)=>{
-      this.tema = data;
-      this.actividades[index].tema = this.tema;
+      this.actividades[index].tema = data;
     })
   }
 
