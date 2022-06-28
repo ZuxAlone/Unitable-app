@@ -2,3 +2,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
+
+mat-divider{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

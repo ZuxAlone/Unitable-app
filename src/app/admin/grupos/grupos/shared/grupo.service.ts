@@ -13,6 +13,10 @@ export class GrupoService {
 
   constructor(private http:HttpClient) { }
 
+  getExists(nombre:string){
+    return this.http.get<boolean>(`${this.apiBase}/Grupo/exists?request=${nombre}`)
+  }
+
   getAll(){
     return this.http.get<Grupo[]>(`${this.apiBase}/Grupo`)
   }

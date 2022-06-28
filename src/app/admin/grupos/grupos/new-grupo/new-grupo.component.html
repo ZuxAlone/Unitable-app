@@ -21,13 +21,19 @@
                             [(ngModel)]="grupoRq.nombre"
                             name = "nombre"
                             #nombre="ngModel"
+                            (ngModelChange)="testNombreOcupado(grupoRq.nombre)"
                             required
                         >
                         <mat-error *ngIf="nombre.hasError('required')">
                             Este campo es obligatorio
                         </mat-error>
                     </mat-form-field>
+                    
+                    
                 </div>
+                <mat-error *ngIf="!testNombre" class="d-flex justify-content-center">
+                    Este nombre ya existe
+                </mat-error>
                 <div class="d-flex justify-content-center">
                     <mat-form-field appearance="outline">
                         <mat-label>Descripcion</mat-label>

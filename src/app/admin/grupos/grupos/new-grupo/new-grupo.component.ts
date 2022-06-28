@@ -32,6 +32,8 @@ export class NewGrupoComponent implements OnInit {
     }
   }
 
+  testNombre: boolean = true;
+
   constructor(private grupoService:GrupoService, private router:Router) { }
 
   ngOnInit(): void {
@@ -42,6 +44,13 @@ export class NewGrupoComponent implements OnInit {
     this.grupoService.getTema()
     .subscribe((data:any)=>{
       this.temas = data;
+    })
+  }
+
+
+  testNombreOcupado(nombre:string):void{
+    this.grupoService.getExists(nombre!=""?nombre:"\"\"").subscribe(x => {
+      this.testNombre = !x
     })
   }
 

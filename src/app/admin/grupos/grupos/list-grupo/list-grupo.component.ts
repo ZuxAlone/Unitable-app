@@ -13,6 +13,12 @@ export class ListGrupoComponent implements OnInit {
   grupos: Grupo[] = [];
   gruposRec: Grupo[] = [];
 
+  gruposF: Grupo[] = [];
+  gruposRecF: Grupo[] = [];
+
+  grupoStrF: string = "";
+  grupoRecStrF: string = "";
+
   constructor(private grupoService:GrupoService, private router:Router) { }
 
   ngOnInit(): void {
@@ -22,11 +28,34 @@ export class ListGrupoComponent implements OnInit {
   getAll():void{
     this.grupoService.getAll()
     .subscribe((data:Grupo[])=>{
-      this.grupos = data;})
+      this.grupos = data
+      this.filterGrupos(this.grupoStrF)
+    })
     this.grupoService.getAllRec()
     .subscribe((data:Grupo[])=>{
       this.gruposRec = data
+      this.filterGruposRec(this.grupoRecStrF)
     })
+  }
+
+  filterGrupos(filter:string){
+    if (filter == "") {
+      this.gruposF = this.grupos;
+    }else{
+      this.gruposF = this.grupos.filter( grupo => {
+        return grupo.nombre.toLowerCase().indexOf(filter.toLowerCase()) != -1
+      })
+    }
+  }
+
+  filterGruposRec(filter:string){
+    if (filter == "") {
+      this.gruposRecF = this.gruposRec;
+    }else{
+      this.gruposRecF = this.gruposRec.filter( grupo => {
+        return grupo.nombre.toLowerCase().indexOf(filter.toLowerCase()) != -1
+      })
+    }
   }
 
   deleteGrupo(index:number){
