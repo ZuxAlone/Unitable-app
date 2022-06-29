@@ -3,6 +3,7 @@
         Mis Recompensas
     </label>
 </div>
+
 <div *ngIf="(recompensas | json) != '[]'">
     <div class="grid">
         <div *ngFor="let recompensa of recompensas" class="my-4 px-3">

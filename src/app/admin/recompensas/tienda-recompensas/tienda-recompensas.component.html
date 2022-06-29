@@ -3,9 +3,23 @@
         Tienda
     </label>
 </div>
+
 <div *ngIf="(recompensas | json) != '[]'">
+    <div class="d-flex justify-content-end espacio">
+        <mat-form-field class="inputFiltro" appearance="outline">
+          <mat-label>Filtros</mat-label>
+          <mat-select name="filtro" [(ngModel)]="opcionFiltro" #filtro="ngModel" (selectionChange)="filtrarRecompensasPor(opcionFiltro)" required>
+              <mat-option value="Todo">Todo</mat-option>
+              <mat-option value="Mayor a menor precio">Mayor a menor precio</mat-option>
+              <mat-option value="Menor a mayor precio">Menor a mayor precio</mat-option>
+              <mat-option value="Dentro del presupuesto">Dentro del presupuesto</mat-option>
+              <mat-option value="Gratis">Gratis</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+
     <div class="grid">
-        <div *ngFor="let recompensa of recompensas" class="my-4 px-3">
+        <div *ngFor="let recompensa of recompensasFiltradas" class="my-4 px-3">
             <mat-card hideToggle class="bg-light">
                 <mat-card-title>
                     <mat-panel-title class="text-left fw-bold fs-5">
@@ -30,6 +44,13 @@
             </mat-card>
         </div>
     </div>
+
+    <div *ngIf = "(recompensasFiltradas | json) == '[]'">
+        <label class="text-left" style="margin: 20px;">
+            No existen recompensas por este filtro.
+        </label>
+    </div>
+
 </div>
 <div *ngIf="(recompensas | json) == '[]'">
     <label class="text-left" style="margin: 20px;">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Recompensa } from '../shared/recompensa.model';
 import { RecompensaService } from '../shared/recompensa.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { RecompensaService } from '../shared/recompensa.service';
 export class ListRecompensasaComponent implements OnInit {
 
   recompensas: any = [];
+  recompensasFiltradas: Recompensa[] =[];
   
   constructor(private recompensaService:RecompensaService, private router:Router, public dialog: MatDialog) { }
 
